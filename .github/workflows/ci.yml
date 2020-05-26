@@ -1,0 +1,28 @@
+name: FaaS CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build function
+      uses: LucasRoesler/openfaas-action/build@v0.1.0
+      with:
+        tag: "latest"
+        path: "api.yml"
+
+    - name: Push function
+      uses: LucasRoesler/openfaas-action/push@v0.1.0
+      with:
+        tag: "latest"
+        path: "api.yml"
