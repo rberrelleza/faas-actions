@@ -15,20 +15,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build function
-      uses: LucasRoesler/openfaas-action/build@v0.1.0
+    - name: Build shrinkwrap function
+      uses: LucasRoesler/openfaas-action/shrinkwrap@v0.1.0
       with:
         tag: "latest"
         path: "api.yml"
 
-    - uses: azure/docker-login@v1
+    - uses: docker/build-push-action@v1
       with:
-        #login-server: '<login server>' # default: index.docker.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    
-    - name: Push function
-      uses: LucasRoesler/openfaas-action/push@v0.1.0
-      with:
-        tag: "latest"
-        path: "api.yml"
+        repository: ramiro/faas-api
+        tag_with_ref: true
+        tag_with_sha: true
+        path: build/api
