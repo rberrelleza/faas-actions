@@ -15,6 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Pull templates
+      uses: rberrelleza/openfaas-action/template_pull@9ace4739a95a55f030192216dd2608dc356d6c88
+
     - name: Build function
       uses: rberrelleza/openfaas-action/build@9ace4739a95a55f030192216dd2608dc356d6c88
       with:
