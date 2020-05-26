@@ -14,21 +14,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+      
     - name: Build function
-      uses: LucasRoesler/openfaas-action/build@v0.1.0
+      uses: rberrelleza/openfaas-action/build@db4ea7e36ee49ccce7a88a884d308e205d6d60b1
       with:
         tag: "latest"
         path: "api.yml"
 
-    - uses: azure/docker-login@v1
-      with:
-        #login-server: '<login server>' # default: index.docker.io
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    
     - name: Push function
-      uses: LucasRoesler/openfaas-action/push@v0.1.0
+      uses: rberrelleza/openfaas-action/push@db4ea7e36ee49ccce7a88a884d308e205d6d60b1
       with:
         tag: "latest"
         path: "api.yml"
