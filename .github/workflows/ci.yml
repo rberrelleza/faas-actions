@@ -14,21 +14,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Pull templates
-      uses: rberrelleza/openfaas-action/template_pull@9ace4739a95a55f030192216dd2608dc356d6c88
-
-    - name: Build function
-      uses: rberrelleza/openfaas-action/build@9ace4739a95a55f030192216dd2608dc356d6c88
-      with:
-        tag: "latest"
-        path: "api.yml"
 
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
       
+    - name: Build function
+      uses: rberrelleza/openfaas-action/build@83a2a34aa098b7fa50a2481c8383cc3ce32d4e94
+      with:
+        tag: "latest"
+        path: "api.yml"
+
     - name: Push function
-      uses: rberrelleza/openfaas-action/push@9ace4739a95a55f030192216dd2608dc356d6c88
+      uses: rberrelleza/openfaas-action/push@83a2a34aa098b7fa50a2481c8383cc3ce32d4e94
       with:
         tag: "latest"
         path: "api.yml"
