@@ -19,13 +19,13 @@ jobs:
       run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
       
     - name: Build function
-      uses: rberrelleza/openfaas-action/build@83a2a34aa098b7fa50a2481c8383cc3ce32d4e94
+      uses: rberrelleza/openfaas-action/build@db4ea7e36ee49ccce7a88a884d308e205d6d60b1
       with:
         tag: "latest"
         path: "api.yml"
 
     - name: Push function
-      uses: rberrelleza/openfaas-action/push@83a2a34aa098b7fa50a2481c8383cc3ce32d4e94
+      uses: rberrelleza/openfaas-action/push@db4ea7e36ee49ccce7a88a884d308e205d6d60b1
       with:
         tag: "latest"
         path: "api.yml"
