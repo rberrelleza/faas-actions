@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build function
-      uses: LucasRoesler/openfaas-action/build@v0.1.0
+    - name: Build shrinkwrap function
+      uses: LucasRoesler/openfaas-action/shrinkwrap@v0.1.0
       with:
         tag: "latest"
         path: "api.yml"
@@ -28,3 +28,4 @@ jobs:
         repository: ramiro/faas-api
         tag_with_ref: true
         tag_with_sha: true
+        path: build/api
